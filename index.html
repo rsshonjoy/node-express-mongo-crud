@@ -14,11 +14,17 @@
       <input type="number" name="quantity" id="" placeholder="quantity" />
       <input type="submit" value="Add Product" />
     </form>
+    <div id="products"></div>
     <script>
       fetch('/products')
         .then((res) => res.json())
         .then((products) => {
-          console.log(products);
+          const container = document.getElementById('products');
+          products.forEach((product) => {
+            const item = document.createElement('p');
+            item.innerHTML = `<strong>${product.name}</strong> -- price: ${product.price} Quantity: ${product.quantity}`;
+            container.appendChild(item);
+          });
         });
     </script>
   </body>
