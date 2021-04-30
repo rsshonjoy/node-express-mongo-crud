@@ -21,7 +21,11 @@ client.connect(err => {
 
   app.post("/addProduct", (req, res) => {
     const product = req.body;
-    console.log(product);
+    collection.insertOne(product)
+    .then(result => {
+      console.log('data added successfully');
+      res.send('success')
+    })
   })
   console.log('database connected');
 });
