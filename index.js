@@ -20,7 +20,7 @@ client.connect(err => {
   const collection = client.db(`${process.env.DB_NAME}`).collection(`${process.env.COLLECTION_NAME}`);
 
   app.get('/products', (req, res) => {
-    collection.find({}).limit(4)
+    collection.find({})
     .toArray((err, documents) => {
       res.send(documents);
     })
