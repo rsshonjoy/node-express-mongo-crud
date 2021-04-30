@@ -23,12 +23,15 @@
             const container = document.getElementById('products');
             products.forEach((product) => {
               const item = document.createElement('p');
-              item.innerHTML = `<strong>${product.name}</strong> -- price: ${product.price} Quantity: ${product.quantity}`;
+              item.innerHTML = `<strong>${product.name}</strong> -- price: ${product.price} Quantity: ${product.quantity} <button onClick="deleteProduct('${product._id}')">Delete</button>`;
               container.appendChild(item);
             });
           });
       }
       loadProducts();
+      function deleteProduct(id) {
+        console.log(id);
+      }
     </script>
   </body>
 </html>
