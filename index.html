@@ -16,16 +16,19 @@
     </form>
     <div id="products"></div>
     <script>
-      fetch('/products')
-        .then((res) => res.json())
-        .then((products) => {
-          const container = document.getElementById('products');
-          products.forEach((product) => {
-            const item = document.createElement('p');
-            item.innerHTML = `<strong>${product.name}</strong> -- price: ${product.price} Quantity: ${product.quantity}`;
-            container.appendChild(item);
+      function loadProducts() {
+        fetch('/products')
+          .then((res) => res.json())
+          .then((products) => {
+            const container = document.getElementById('products');
+            products.forEach((product) => {
+              const item = document.createElement('p');
+              item.innerHTML = `<strong>${product.name}</strong> -- price: ${product.price} Quantity: ${product.quantity}`;
+              container.appendChild(item);
+            });
           });
-        });
+      }
+      loadProducts();
     </script>
   </body>
 </html>
