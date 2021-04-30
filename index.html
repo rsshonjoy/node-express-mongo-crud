@@ -22,25 +22,28 @@
           .then((res) => res.json())
           .then((products) => {
             const container = document.getElementById('products');
+            container.innerHTML = '';
             products.forEach((product) => {
               const item = document.createElement('p');
               item.innerHTML = `<strong>${product.name}</strong> -- 
                 price: ${product.price} 
                 Quantity: ${product.quantity} 
                 <button onClick="updateProduct('${product._id}')">Update</button> 
-                <button onClick="deleteProduct('${product._id}')">Delete</button>`;
+                <button onClick="deleteProduct(event, '${product._id}')">Delete</button>`;
               container.appendChild(item);
             });
           });
       }
       loadProducts();
-      function deleteProduct(id) {
+      function deleteProduct(event, id) {
         fetch(`/delete/${id}`, {
           method: 'DELETE',
         })
           .then((res) => res.json())
           .then((result) => {
-            console.log('deleted successfully');
+            if (result) {
+              event.target.parentNode.style.display = 'none';
+            }
           });
       }
       function updateProduct(id) {
@@ -69,7 +72,10 @@
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log('updated');
+            if (data) {
+              loadProducts();
+              document.getElementById('update').innerHTML = '';
+            }
           });
       }
     </script>
