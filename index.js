@@ -43,6 +43,15 @@ client.connect(err => {
       console.log(result);
     })
   })
+
+  app.get('/product/:id', (req, res) => {
+    collection.find({_id: ObjectId(req.params.id)})
+    .toArray((err, documents) => {
+      res.send(documents[0]);
+    })
+  })
+
+
   console.log('database connected');
 });
 

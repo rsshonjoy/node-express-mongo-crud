@@ -15,6 +15,7 @@
       <input type="submit" value="Add Product" />
     </form>
     <div id="products"></div>
+    <div id="update"></div>
     <script>
       function loadProducts() {
         fetch('/products')
@@ -23,7 +24,11 @@
             const container = document.getElementById('products');
             products.forEach((product) => {
               const item = document.createElement('p');
-              item.innerHTML = `<strong>${product.name}</strong> -- price: ${product.price} Quantity: ${product.quantity} <button onClick="deleteProduct('${product._id}')">Delete</button>`;
+              item.innerHTML = `<strong>${product.name}</strong> -- 
+                price: ${product.price} 
+                Quantity: ${product.quantity} 
+                <button onClick="updateProduct('${product._id}')">Update</button> 
+                <button onClick="deleteProduct('${product._id}')">Delete</button>`;
               container.appendChild(item);
             });
           });
@@ -36,6 +41,16 @@
           .then((res) => res.json())
           .then((result) => {
             console.log('deleted successfully');
+          });
+      }
+      function updateProduct(id) {
+        fetch(`product/${id}`)
+          .then((res) => res.json())
+          .then((data) => {
+            const update = document.getElementById('update');
+            update.innerHTML = `
+              <h3>Update: ${data._id}</h3>
+            `;
           });
       }
     </script>
