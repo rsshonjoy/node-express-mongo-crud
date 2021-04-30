@@ -50,6 +50,11 @@
             const update = document.getElementById('update');
             update.innerHTML = `
               <h3>Update: ${data._id}</h3>
+              Price: <input type="text" value="${data.price}" id="price"/>
+              <br/>
+              Quantity: <input type="text" value="${data.quantity}" id="quantity"/>
+              <br/>
+              <input type="submit" value="Submit"/>
             `;
           });
       }
